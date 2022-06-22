@@ -1,15 +1,14 @@
 <template>
-  <nav-bar></nav-bar>
-  <div class="app">
-    <router-view />
+  <div>
+    <h1>Auth page</h1>
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/Nav-bar.vue';
 
 export default {
-  components: { NavBar },
+  components: {
+  },
   data() {
     return {
     };
