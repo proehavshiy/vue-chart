@@ -1,14 +1,8 @@
 import { createStore } from 'vuex';
+import { analyticsModule } from './modules/analyticsModule';
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    analytics: analyticsModule,
   },
 });

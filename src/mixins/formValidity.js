@@ -26,12 +26,12 @@ export default {
       if (badInput) this.errorMessage[input.name] = 'Введено недопустимое значение';
       if (patternMismatch) this.errorMessage[input.name] = 'Некорректный формат данных';
 
-      if (rangeOverflow) this.errorMessage[input.name] = `id сайта должен содержать ${input.max} символа`;
-      if (rangeUnderflow) this.errorMessage[input.name] = `id сайта должен содержать ${input.min} символа`;
+      if (rangeOverflow) this.errorMessage[input.name] = `значение более ${input.max}`;
+      if (rangeUnderflow) this.errorMessage[input.name] = `значение менее ${input.min}`;
 
       if (valueMissing) this.errorMessage[input.name] = 'Поле является обязательным';
-      if (tooShort) this.errorMessage[input.name] = `Значение менее ${input.minLength} симв.`;
-      if (tooLong) this.errorMessage[input.name] = `Значение более ${input.maxLength} симв.`;
+      if (tooShort) this.errorMessage[input.name] = `id сайта должен содержать ${input.minLength} симв.`;
+      if (tooLong) this.errorMessage[input.name] = `id сайта должен содержать ${input.maxLength} симв.`;
       if (typeMismatch) this.errorMessage[input.name] = `Поле не соответствует типу ${input.type}`;
 
       if (stepMismatch) {

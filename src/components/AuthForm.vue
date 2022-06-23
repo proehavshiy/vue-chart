@@ -18,7 +18,7 @@
           required
           type="text"
           minlength="24"
-          maxlength="24"
+          maxLength="24"
         />
       </form-section>
     </fieldset>
@@ -30,6 +30,7 @@
 
 <script>
 import formValidity from '@/mixins/formValidity';
+import axios from 'axios';
 import FormSection from './UI/FormSection.vue';
 
 export default {
@@ -52,6 +53,22 @@ export default {
   methods: {
     submitForm() {
       console.log('submit:');
+      this.fetchData();
+    },
+    async fetchData() {
+      try {
+        const response = await axios.get('https://track-api.leadhit.io/client/test_auth', {
+          headers: {
+            'Api-Key': '5f8475902b0be670555f1bb3:eEZn8u05G3bzRpdL7RiHCvrYAYo',
+            'Leadhit-Site-Id': this.inputData.siteId,
+          },
+        });
+        console.log('response:', response);
+      } catch (e) {
+        console.log('error fetch:', e);
+      } finally {
+        console.log('finally:');
+      }
     },
   },
 };
