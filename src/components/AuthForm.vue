@@ -13,7 +13,10 @@
           id="id"
           name="id"
           :placeholder="placeHolder.id"
-          v-model="inputData.siteId"
+          :model-value="inputData.id"
+          @update:model-value="
+            (value) => setInputData({ inputType: 'id', value })
+          "
           @validate="checkInputValidity"
           required
           type="text"
@@ -30,7 +33,7 @@
 
 <script>
 import formValidity from '@/mixins/formValidity';
-import axios from 'axios';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import FormSection from './UI/FormSection.vue';
 
 export default {
@@ -39,37 +42,29 @@ export default {
   mixins: [formValidity],
   data() {
     return {
-      inputData: {
-        siteId: '',
-      },
       placeHolder: {
         id: 'Введите id',
       },
       label: {
-        id: 'Введите id',
+        id: 'id сайта',
       },
     };
   },
+  computed: {
+    ...mapState({
+      inputData: (state) => state.analytics.inputData,
+    }),
+  },
   methods: {
     submitForm() {
-      console.log('submit:');
-      this.fetchData();
+      this.fetchAnalyticsData();
     },
-    async fetchData() {
-      try {
-        const response = await axios.get('https://track-api.leadhit.io/client/test_auth', {
-          headers: {
-            'Api-Key': '5f8475902b0be670555f1bb3:eEZn8u05G3bzRpdL7RiHCvrYAYo',
-            'Leadhit-Site-Id': this.inputData.siteId,
-          },
-        });
-        console.log('response:', response);
-      } catch (e) {
-        console.log('error fetch:', e);
-      } finally {
-        console.log('finally:');
-      }
-    },
+    ...mapMutations({
+      setInputData: 'setInputData',
+    }),
+    ...mapActions({
+      fetchAnalyticsData: 'fetchAnalyticsData',
+    }),
   },
 };
 </script>

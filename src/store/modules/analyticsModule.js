@@ -1,21 +1,12 @@
 /* eslint-disable import/prefer-default-export */
-import VuexPersistence from 'vuex-persist';
 import axios from 'axios';
-
-const localStorageCache = new VuexPersistence({
-  key: 'analytics-app',
-  storage: window.localStorage,
-  reducer: (state) => ({
-    analyticsDate: state.analyticsDate,
-    siteId: state.inputData.siteId,
-  }),
-});
 
 export const analyticsModule = {
   state: () => ({
     inputData: {
-      siteId: '',
+      id: '',
     },
+    siteId: '',
     analyticsData: [
       { date: '2020-07-01', visits: 213 },
       { date: '2020-07-02', visits: 249 },
@@ -52,8 +43,11 @@ export const analyticsModule = {
   getters: {
   },
   mutations: {
-    setInputData(state, { inputName, value }) {
-      state.inputData[inputName] = value;
+    setInputData(state, { inputType, value }) {
+      state.inputData[inputType] = value;
+    },
+    setSiteId(state, value) {
+      state.siteId = value;
     },
     setAnalyticsData(state, data) {
       state.analyticsDate = data;
@@ -63,23 +57,25 @@ export const analyticsModule = {
     },
   },
   actions: {
-    async fetchData({ state, commit }) {
+    async fetchAnalyticsData({ state, commit }) {
       try {
         commit('setLoading', true);
         const response = await axios.get('https://track-api.leadhit.io/client/test_auth', {
           headers: {
             'Api-Key': '5f8475902b0be670555f1bb3:eEZn8u05G3bzRpdL7RiHCvrYAYo',
-            'Leadhit-Site-Id': state.inputData.siteId,
+            'Leadhit-Site-Id': state.inputData.id,
           },
         });
         console.log('response:', response);
+        commit('setSiteId', state.inputData.id);
+        console.log('state.inputData.id:', state.inputData.id);
       } catch (e) {
         console.log('error fetch:', e);
       } finally {
+        commit('setInputData', { inputType: 'id', value: '' });
         commit('setLoading', false);
       }
     },
   },
-  plugins: [localStorageCache.plugin],
-  strict: process.env.NODE_ENV !== 'production',
+  // namespaced: true,
 };
