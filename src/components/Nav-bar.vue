@@ -25,6 +25,6 @@ export default {
 
   color: black;
   font-weight: 600;
-  background-color: aqua;
+  background-color: $bgColor;
 }
 </style>
