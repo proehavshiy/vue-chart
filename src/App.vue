@@ -1,8 +1,8 @@
 <template>
-  <nav-bar></nav-bar>
-  <div class="app">
+  <main class="app">
+    <nav-bar></nav-bar>
     <router-view />
-  </div>
+  </main>
 </template>
 
 <script>
@@ -20,4 +20,15 @@ export default {
 </script>
 
 <style lang="scss">
+.app {
+  max-width: $b1440;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  &__heading {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+}
 </style>
