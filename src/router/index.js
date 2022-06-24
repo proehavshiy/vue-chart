@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable consistent-return */
 import { createRouter, createWebHistory } from 'vue-router';
 import AuthPage from '@/pages/Auth-page.vue';
 import AnalyticsPage from '@/pages/Analytics-page.vue';
+import ErrorPage from '@/pages/Error-page.vue';
 import unpackLocalStorage from '@/utils/unpackLocalStorage';
 
 const routes = [
@@ -18,6 +17,11 @@ const routes = [
     meta: {
       requireSiteId: true,
     },
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'errorPage',
+    component: ErrorPage,
   },
 ];
 
