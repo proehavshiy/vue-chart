@@ -122,7 +122,7 @@ export default {
     }
 
     // стилизуем label красной точкой, если инпут обязательный
-    &:required ~ label::before {
+    &:required::v-deep ~ label::before {
       content: "";
       width: 4px;
       height: 4px;

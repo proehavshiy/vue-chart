@@ -36,8 +36,10 @@ export default {
       // если при изменении не будет в localstorage siteId, произойдет редирект на auth
       this.setAnalyticsData([]);
       this.setSiteId('');
-      const [isExist, { siteId }] = unpackLocalStorage('analytics-app-store');
-      if (isExist && !siteId) this.$router.push({ name: 'auth' });
+      localStorage.removeItem('analytics-app-store');
+
+      const [isExist] = unpackLocalStorage('analytics-app-store');
+      if (!isExist) this.$router.push({ name: 'auth' });
     },
   },
 };

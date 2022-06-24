@@ -36,7 +36,7 @@ router.beforeEach((to, from, next) => {
       next(false);
     }
   } else {
-    next(true);
+    next();
   }
 });
 
