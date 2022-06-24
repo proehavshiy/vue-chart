@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import CONSTANTS from '@/constants/constants';
 
@@ -29,7 +30,7 @@ export const analyticsModule = {
     },
   },
   actions: {
-    async fetchAnalyticsData({ state, commit }) {
+    async fetchAnalyticsData({ state, commit }, callback) {
       try {
         commit('setLoading', true);
         const response = await axios.get(RESPONSE_URL, {
@@ -45,6 +46,8 @@ export const analyticsModule = {
           commit('setSiteId', state.inputData.id);
           // мок получения и записи данных для графика в стейт
           commit('setAnalyticsData', ANALYTICS_DATA);
+          // редирект на страницу /analytics
+          callback();
         }
       } catch (e) {
         console.log('error fetch:', e);

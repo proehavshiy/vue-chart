@@ -57,7 +57,8 @@ export default {
   },
   methods: {
     submitForm() {
-      this.fetchAnalyticsData();
+      const redirectToAnalyticsPage = () => this.$router.push({ name: 'analytics' });
+      this.fetchAnalyticsData(redirectToAnalyticsPage);
     },
     ...mapMutations({
       setInputData: 'setInputData',

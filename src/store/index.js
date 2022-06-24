@@ -3,16 +3,20 @@ import VuexPersistence from 'vuex-persist';
 // import axios from 'axios';
 import { analyticsModule } from './modules/analyticsModule';
 
-const localStorageCache = new VuexPersistence({
-  key: 'analytics-app',
+const siteIdCache = new VuexPersistence({
+  key: 'analytics-app-store',
   storage: window.localStorage,
-  // сохраняется только siteId при его мутации
-  reducer: (state) => ({ siteid: state.analytics.siteId }),
-  filter: (mutation) => mutation.type === 'setSiteId',
+  // сохраняется только siteId и data при его мутации
+  // modules: ['analytics'],
+  reducer: (state) => ({
+    siteId: state.analytics.siteId,
+    data: state.analytics.analyticsData,
+  }),
+  filter: (mutation) => mutation.type === 'setSiteId' || mutation.type === 'setAnalyticsData',
 });
 
 export default createStore({
-  plugins: [localStorageCache.plugin],
+  plugins: [siteIdCache.plugin],
   modules: {
     analytics: analyticsModule,
   },
