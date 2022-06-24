@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>Chart</div>
     <div class="chart" ref="chartdiv"></div>
   </div>
 </template>
@@ -17,7 +16,7 @@ export default {
     },
   },
   mounted() {
-    this.chart = createChart(this.$refs.chartdiv, this.data);
+    this.chart = createChart(this.$refs.chartdiv, this.data, 'Аналитика по визитам');
   },
   onUnmount() {
     if (this.chart) {
