@@ -14,5 +14,11 @@ export default {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background-color: none;
+  @include standartTransition(0.2);
+  @include extraTextHidden;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 </style>
