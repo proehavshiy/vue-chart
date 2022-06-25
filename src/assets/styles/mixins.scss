@@ -8,12 +8,6 @@
   flex-direction: column;
 }
 
-@mixin standartFlex {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 @mixin vueFade($duration) {
 
   .fade-enter-active,

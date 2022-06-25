@@ -13,10 +13,6 @@ export default {
   components: {
     Chart,
   },
-  data() {
-    return {
-    };
-  },
   computed: {
     ...mapState({
       analyticsData: (state) => state.analytics.analyticsData,

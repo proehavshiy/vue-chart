@@ -1,5 +1,5 @@
 <template>
-  <form class="form" @submit.prevent="submitForm" noValidate>
+  <form class="form" @submit.prevent="handleSubmit" noValidate>
     <fieldset class="form__fieldset">
       <form-section
         class="form__section"
@@ -14,9 +14,7 @@
           name="id"
           :placeholder="placeHolder.id"
           :model-value="inputData.id"
-          @update:model-value="
-            (value) => setInputData({ inputType: 'id', value })
-          "
+          @update:model-value="handleInput"
           @validate="checkInputValidity"
           required
           type="text"
@@ -33,13 +31,22 @@
 
 <script>
 import formValidity from '@/mixins/formValidity';
-import { mapState, mapMutations, mapActions } from 'vuex';
 import FormSection from './UI/FormSection.vue';
 
 export default {
   components: { FormSection },
   name: 'auth-form',
   mixins: [formValidity],
+  props: {
+    inputData: {
+      type: Object,
+      required: true,
+    },
+    submitCallback: {
+      type: Function,
+      required: true,
+    },
+  },
   data() {
     return {
       placeHolder: {
@@ -50,24 +57,14 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapState({
-      inputData: (state) => state.analytics.inputData,
-    }),
-  },
   methods: {
-    submitForm() {
-      const redirectToAnalyticsPage = () => this.$router.push({ name: 'analytics' });
-      this.fetchAnalyticsData(redirectToAnalyticsPage);
-
+    handleInput({ name, value }) {
+      this.$emit('update:inputData', { inputType: name, value });
+    },
+    handleSubmit() {
+      this.submitCallback();
       if (this.formValidity) this.formValidity = false;
     },
-    ...mapMutations({
-      setInputData: 'setInputData',
-    }),
-    ...mapActions({
-      fetchAnalyticsData: 'fetchAnalyticsData',
-    }),
   },
 };
 </script>

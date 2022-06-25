@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div class="navbar__logo" @click="$router.push({ name: 'auth' })">
-      AdStats.io
+      AdStats.ex
     </div>
     <nav class="navbar__nav">
       <main-button

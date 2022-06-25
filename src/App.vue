@@ -45,7 +45,7 @@ export default {
 
 <style lang="scss">
 .app {
-  max-width: $b1440;
+  max-width: $maxContentWidth;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

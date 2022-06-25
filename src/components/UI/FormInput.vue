@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     changeInputValue(e) {
-      this.$emit('update:modelValue', e.target.value);
+      this.$emit('update:modelValue', e.target);
       this.$emit('validate', e.target);
     },
   },
