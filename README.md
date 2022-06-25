@@ -1,4 +1,5 @@
 # Vue3 Chart
+SPA для аналитики визитов сайта
 
 [Посмотреть деплой](https://proehavshiy.github.io/vue-chart/)
 
