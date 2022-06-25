@@ -146,9 +146,6 @@ export default {
     min-width: 100px;
     background: $submitColorActive;
 
-    font-weight: 600;
-    font-size: 12px;
-
     color: $accentColorLight;
 
     @include standartTransition(0.2);

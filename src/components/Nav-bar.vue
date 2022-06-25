@@ -11,21 +11,45 @@
       >
         Аналитика
       </main-button>
+      <main-button
+        v-if="this.$route.name !== 'auth'"
+        class="navbar__btn navbar__btn_logout"
+        @click="logOut"
+      >
+        Выйти
+      </main-button>
     </nav>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+import unpackLocalStorage from '@/utils/unpackLocalStorage';
+
 export default {
   name: 'nav-bar',
-  props: {},
+  methods: {
+    ...mapMutations({
+      setAnalyticsData: 'setAnalyticsData',
+      setSiteId: 'setSiteId',
+    }),
+    logOut() {
+      // если при изменении не будет в localstorage siteId, произойдет редирект на auth
+      this.setAnalyticsData([]);
+      this.setSiteId('');
+      localStorage.removeItem('analytics-app-store');
+
+      const [isExist] = unpackLocalStorage('analytics-app-store');
+      if (!isExist) this.$router.push({ name: 'auth' });
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .navbar {
   height: 60px;
-  padding: 0 40px;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -57,10 +81,11 @@ export default {
     width: 100px;
     background: $submitColorActive;
 
-    font-weight: 600;
-    font-size: 12px;
-
     color: $accentColorLight;
+
+    &_logout {
+      background: $accentColor;
+    }
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="auth-page">
+  <div class="app__page auth-page">
     <section-heading class="app__heading">LeadHit</section-heading>
     <auth-form class="auth-page__form" />
   </div>
@@ -19,8 +19,6 @@ export default {
 
 <style lang="scss">
 .auth-page {
-  margin-top: 50px;
-
   // auth-page__form
   &__form {
     display: flex;

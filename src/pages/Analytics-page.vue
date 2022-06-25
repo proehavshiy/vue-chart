@@ -1,22 +1,17 @@
 <template>
-  <div>
-    <h1>Analytics page</h1>
+  <div class="app__page analytics-page">
+    <section-heading class="app__heading">Аналитика</section-heading>
     <Chart :data="analyticsData" />
-    <main-button @click="logOut">Выйти</main-button>
   </div>
 </template>
 
 <script>
-/* eslint-disable vue/no-unused-components */
+import { mapState } from 'vuex';
 import Chart from '@/components/Chart.vue';
-import { mapState, mapMutations } from 'vuex';
-import unpackLocalStorage from '@/utils/unpackLocalStorage';
-import MainButton from '@/components/UI/MainButton.vue';
 
 export default {
   components: {
     Chart,
-    MainButton,
   },
   data() {
     return {
@@ -27,23 +22,13 @@ export default {
       analyticsData: (state) => state.analytics.analyticsData,
     }),
   },
-  methods: {
-    ...mapMutations({
-      setAnalyticsData: 'setAnalyticsData',
-      setSiteId: 'setSiteId',
-    }),
-    logOut() {
-      // если при изменении не будет в localstorage siteId, произойдет редирект на auth
-      this.setAnalyticsData([]);
-      this.setSiteId('');
-      localStorage.removeItem('analytics-app-store');
-
-      const [isExist] = unpackLocalStorage('analytics-app-store');
-      if (!isExist) this.$router.push({ name: 'auth' });
-    },
-  },
 };
 </script>
 
 <style lang="scss">
+.analytics-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 </style>

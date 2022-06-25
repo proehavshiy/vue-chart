@@ -50,6 +50,11 @@ export default {
   display: flex;
   flex-direction: column;
 
+  &__page {
+    padding: 0 20px;
+    margin-top: 50px;
+  }
+
   &__heading {
     margin-bottom: 50px;
     text-align: center;

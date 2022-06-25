@@ -17,6 +17,9 @@ export default {
   @include standartTransition(0.2);
   @include extraTextHidden;
 
+  font-size: 12px;
+  font-weight: 600;
+
   &:hover {
     opacity: 0.8;
   }

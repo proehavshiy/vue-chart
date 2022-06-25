@@ -60,7 +60,6 @@ export default function createChart(rootHtmlEl, data, heading) {
   const chart = am4core.create(rootHtmlEl, am4charts.XYChart);
   chart.language.locale = ruLocale;
 
-  chart.paddingRight = 20;
   chart.data = data;
 
   const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
