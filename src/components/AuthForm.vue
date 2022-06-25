@@ -59,6 +59,8 @@ export default {
     submitForm() {
       const redirectToAnalyticsPage = () => this.$router.push({ name: 'analytics' });
       this.fetchAnalyticsData(redirectToAnalyticsPage);
+
+      if (this.formValidity) this.formValidity = false;
     },
     ...mapMutations({
       setInputData: 'setInputData',

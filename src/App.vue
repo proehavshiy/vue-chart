@@ -3,18 +3,27 @@
     <nav-bar></nav-bar>
     <router-view />
   </main>
+  <modal-info :visibility="modalStatus.status">
+    {{ modalStatus.message }}
+  </modal-info>
 </template>
 
 <script>
 import NavBar from '@/components/Nav-bar.vue';
-import { mapMutations } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import unpackLocalStorage from '@/utils/unpackLocalStorage';
+import ModalInfo from './components/UI/ModalInfo.vue';
 
 export default {
-  components: { NavBar },
+  components: { NavBar, ModalInfo },
   data() {
     return {
     };
+  },
+  computed: {
+    ...mapState({
+      modalStatus: (state) => state.analytics.modalStatus,
+    }),
   },
   beforeMount() {
     // достать из localStorage данные при их наличии

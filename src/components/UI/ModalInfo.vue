@@ -6,11 +6,15 @@
   </div>
 </template>
 <script>
-import toggleVisibility from '@/mixins/toggleVisibility';
 
 export default {
   name: 'modal-info',
-  mixins: [toggleVisibility],
+  props: {
+    visibility: {
+      type: Boolean,
+      default: false,
+    },
+  },
 };
 </script>
 
@@ -40,7 +44,7 @@ export default {
     justify-content: flex-end;
 
     padding: 10px;
-    background: $submitColorActive;
+    background: $accentColor;
     color: $accentColorLight;
     border-radius: 10px;
 

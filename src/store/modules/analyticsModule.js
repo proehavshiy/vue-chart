@@ -11,7 +11,10 @@ export const analyticsModule = {
     },
     siteId: '',
     analyticsData: [],
-    isLoading: false,
+    modalStatus: {
+      status: false,
+      message: '',
+    },
   }),
   getters: {
   },
@@ -25,14 +28,13 @@ export const analyticsModule = {
     setAnalyticsData(state, data) {
       state.analyticsData = data;
     },
-    setLoading(state, bool) {
-      state.isLoading = bool;
+    setModalStatus(state, { status, message }) {
+      state.modalStatus = { status, message };
     },
   },
   actions: {
     async fetchAnalyticsData({ state, commit }, callback) {
       try {
-        commit('setLoading', true);
         const response = await axios.get(RESPONSE_URL, {
           headers: {
             'Api-Key': API_KEY,
@@ -50,10 +52,12 @@ export const analyticsModule = {
           callback();
         }
       } catch (e) {
-        console.log('error fetch:', e);
+        commit('setModalStatus', { status: true, message: 'Ошибка: Неверный Leadhit-site-id' });
       } finally {
         commit('setInputData', { inputType: 'id', value: '' });
-        commit('setLoading', false);
+        setTimeout(() => {
+          commit('setModalStatus', { status: false, message: '' });
+        }, 2000);
       }
     },
   },
