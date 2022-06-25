@@ -34,13 +34,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requireSiteId)) {
     const [isExist, { siteId }] = unpackLocalStorage('analytics-app-store');
-    if (isExist) {
-      if (siteId) next(true);
+    if (isExist && siteId) {
+      next(true);
     } else {
-      next(false);
+      // если siteId в localStorage нет / он пустой, то редирект на авторизацию
+      next({ name: 'auth' });
     }
   } else {
-    next();
+    next(true);
   }
 });
 

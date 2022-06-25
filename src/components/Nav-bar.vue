@@ -12,7 +12,7 @@
         Аналитика
       </main-button>
       <main-button
-        v-if="this.$route.name !== 'auth'"
+        v-if="this.$route.name === 'analytics'"
         class="navbar__btn navbar__btn_logout"
         @click="logOut"
       >
@@ -34,13 +34,12 @@ export default {
       setSiteId: 'setSiteId',
     }),
     logOut() {
-      // если при изменении не будет в localstorage siteId, произойдет редирект на auth
+      // очищаем стейты и редиректим на auth, тк localstorage тоже очистится
       this.setAnalyticsData([]);
       this.setSiteId('');
-      localStorage.removeItem('analytics-app-store');
 
-      const [isExist] = unpackLocalStorage('analytics-app-store');
-      if (!isExist) this.$router.push({ name: 'auth' });
+      const [isExist, { siteId }] = unpackLocalStorage('analytics-app-store');
+      if (isExist && !siteId) this.$router.push({ name: 'auth' });
     },
   },
 };
