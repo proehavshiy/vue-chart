@@ -12,10 +12,9 @@
 import NavBar from '@/components/Nav-bar.vue';
 import { mapState, mapMutations } from 'vuex';
 import unpackLocalStorage from '@/utils/unpackLocalStorage';
-import ModalInfo from './components/UI/ModalInfo.vue';
 
 export default {
-  components: { NavBar, ModalInfo },
+  components: { NavBar },
   data() {
     return {
     };
@@ -52,7 +51,7 @@ export default {
   flex-direction: column;
 
   &__heading {
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     text-align: center;
   }
 }

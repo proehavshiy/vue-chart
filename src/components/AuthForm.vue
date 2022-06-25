@@ -142,7 +142,8 @@ export default {
 
   &__submit {
     padding: 10px;
-    min-height: 36px;
+    min-height: 30px;
+    min-width: 100px;
     background: $submitColorActive;
 
     font-weight: 600;

@@ -14,12 +14,6 @@ export default {
     AuthForm,
     SectionHeading,
   },
-  data() {
-    return {
-    };
-  },
-  methods: {
-  },
 };
 </script>
 
@@ -29,6 +23,8 @@ export default {
 
   // auth-page__form
   &__form {
+    display: flex;
+    flex-direction: column;
     max-width: 360px;
     margin: 0 auto;
   }
